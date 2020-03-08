@@ -300,3 +300,11 @@ double kms::squared_error(const MatrixXd& X, const RowVectorXd* centers, const v
 			error += std::pow(euclidean_norm(X.row(idx), centers[i]), 2);
 	return error;
 }
+
+VectorXd KMeans::predict(const MatrixXd& X)
+{
+	VectorXd labels(X.rows());
+	for (int i = 0; i < X.rows(); i++)
+		labels[i] = kms::nearest_center(X.row(i), centers, K);
+	return labels;
+}
